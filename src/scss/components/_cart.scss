@@ -1,0 +1,152 @@
+.cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 600;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px 40px;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+
+  &__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 88%;
+    letter-spacing: -0.04em;
+    color: #1F2020;
+  }
+
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 94px;
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(#000000, 0.1);
+    background-color: transparent;
+    border-radius: 50%;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  &__total-text {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 100%;
+    color: #1F2020;
+  }
+
+  &__total-price {
+    display: block;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+    color: #1F2020;
+  }
+}
+
+.cart-list {
+  max-height: calc(100vh - 331px);
+  overflow-x: scroll;
+}
+
+.cart-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(#000000, 0.1);
+
+  &__count {
+    font-size: 14px;
+    line-height: 112%;
+    color: #1F2020;
+  }
+
+  &__reset {
+    padding: 0;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 112%;
+    text-align: right;
+    color: #1F2020;
+    opacity: 0.4;
+    border: none;
+    background-color: transparent;
+  }
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(#000000, 0.1);
+  }
+
+  &__img {
+    max-width: 96px;
+  }
+
+  &__info {
+    max-width: 180px;
+  }
+
+  &__control-button {
+    padding: 4px 12px;
+    background: #F2F2F2;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  &__count {
+    margin: 0 17px;
+    font-size: 16px;
+    line-height: 100%;
+    color: $main-color;
+  }
+
+  &__title {
+    margin: 0 0 16px 0;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 112%;
+    letter-spacing: 0.02em;
+    color: $main-color;
+  }
+
+  &__delete {
+    background-color: transparent;
+    border: none;
+  }
+
+  &__price {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    color: $main-color;
+  }
+}

@@ -1,0 +1,24 @@
+.sort {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 280px;
+  width: 100%;
+  background: #FFFFFF;
+  transform: translateX(-75%);
+  z-index: 700;
+
+  &__item {
+    padding: 17px 24px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $main-color;
+    &_active {
+      background-color: $accent-coror;
+    }
+  }
+}

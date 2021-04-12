@@ -1,0 +1,160 @@
+.header {
+  &__row {
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba($main-color, 0.06);
+  }
+
+  &__nav {
+    display: none;
+  }
+
+  &__basket {
+    width: 24px;
+    height: 24px;
+    background-color: $accent-coror;
+    border-radius: 50%;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    border: none;
+  }
+
+  &__contact {
+    display: none;
+  }
+
+  &__search {
+    display: none;
+  }
+
+  &__profile {
+    display: none;
+  }
+
+  &__favorite {
+    display: none;
+  }
+}
+.burger {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.menu {
+  &__item {
+    margin-right: 24px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &__link {
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $main-color;
+    text-decoration: none;
+  }
+}
+@media screen and (min-width: 991px){
+  .burger {
+    display: none;
+  }
+  .header {
+    &__navbar {
+      display: flex;
+      flex-grow: 0.4;
+      justify-content: space-between;
+    }
+
+    &__nav {
+      display: block;
+      width: 70%;
+    }
+
+    &__contact {
+      display: block;
+    }
+
+    &__logo svg {
+      width: 135px;
+      height: 28px;
+    }
+
+    &__info {
+      display: flex;
+      flex-grow: 0.14;
+      justify-content: space-between;
+    }
+
+    &__icons {
+      display: flex;
+      min-width: 166px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__search {
+      display: block;
+      border: none;
+      background-color: transparent;
+    }
+
+    &__profile {
+      display: block;
+      border: none;
+      background-color: transparent;
+    }
+
+    &__favorite {
+      display: block;
+      border: none;
+      background-color: transparent;
+    }
+
+    &__phone {
+      display: block;
+      margin-bottom: 3px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 100%;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: -0.02em;
+      color: $main-color;
+    }
+
+    &__callback {
+      padding: 0;
+      display: block;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 100%;
+      color: $main-color;
+      opacity: 0.3;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    &__row {
+      padding-top: 35px;
+      padding-bottom: 34px;
+      align-items: flex-end;
+    }
+  }
+
+  .menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
