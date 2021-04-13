@@ -43,7 +43,7 @@ export default {
     ProductItem,
   },
   computed: mapGetters({
-    products: "getProducts",
+    products: "getFilteredProducts",
   }),
   methods: {
     showSorting(e) {

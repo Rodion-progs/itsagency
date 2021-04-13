@@ -122,7 +122,7 @@
                 />
               </svg>
             </button>
-            <button class="header__basket" @click="openCart">4</button>
+            <button class="header__basket" @click="openCart">{{ getProductsInCart.length }}</button>
           </div>
         </div>
       </div>
@@ -131,8 +131,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "AppHeader",
+  computed: mapGetters(["getProductsInCart"]),
   methods: {
     openCart() {
       this.$store.commit("toggleCart", true);
