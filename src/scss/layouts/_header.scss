@@ -75,8 +75,8 @@
     }
 
     &__nav {
-      display: block;
-      width: 70%;
+      display: flex;
+      align-items: center;
     }
 
     &__contact {

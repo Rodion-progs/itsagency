@@ -149,4 +149,19 @@
     line-height: 100%;
     color: $main-color;
   }
+
+  &_disabled .cart-item {
+    &__img {
+      opacity: 0.2;
+    }
+    &__title {
+      opacity: 0.2;
+    }
+    &__price {
+      opacity: 0.2;
+    }
+    &__control {
+      opacity: 0.2;
+    }
+  }
 }

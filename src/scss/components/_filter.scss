@@ -1,7 +1,15 @@
 .filter {
-  display: none;
   width: 100%;
-  max-width: 303px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 320px;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-radius: 24px 24px 0px 0px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  z-index: 600;
   &__item {
     display: flex;
     align-items: center;
@@ -53,8 +61,25 @@
     }
   }
 }
+.filter-stick {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 12px auto 26px;
+  background: $main-color;
+  opacity: 0.6;
+  border-radius: 40px;
+}
 @media screen and (min-width: 1200px) {
   .filter {
     display: block;
+    position: static;
+    border: none;
+    height: initial;
+    width: 25%;
+    z-index: 100;
+  }
+  .filter-stick {
+    display: none;
   }
 }

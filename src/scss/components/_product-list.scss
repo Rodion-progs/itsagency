@@ -33,6 +33,9 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+    &_with-icon svg {
+      pointer-events: none;
+    }
   }
 
   &__count{

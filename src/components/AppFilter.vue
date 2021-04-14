@@ -1,5 +1,12 @@
 <template>
-  <div class="filter">
+ <div
+    class="filter"
+    @mousedown="startDrag($event)"
+    @mouseup="stopDrag($event)"
+  >
+    <div
+      class="filter-stick"
+    ></div>
     <label
       class="filter__item"
       v-for="filter in getFilters"
@@ -22,13 +29,25 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  computed: mapGetters(["getFilters"]),
+  computed: mapGetters(["getFilters", "getWindowWidth"]),
+  data() {
+    return {
+      currentPosition: 0,
+    };
+  },
   methods: {
     changeFilter(payload) {
       this.$store.commit("changeFilter", payload);
     },
+    startDrag(e) {
+      this.currentPosition = e.clientY;
+    },
+    stopDrag(e) {
+      if ((e.clientY - this.currentPosition) > 50) {
+        this.$store.commit("toggleFilter", false);
+      }
+    }
   },
 };
 </script>
 
-<style scoped></style>

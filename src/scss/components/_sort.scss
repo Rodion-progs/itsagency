@@ -2,13 +2,13 @@
   position: absolute;
   margin: 0;
   padding: 0;
+  right: 20px;
+  top: 50%;
   list-style: none;
   max-width: 280px;
-  width: 100%;
+  width: calc(100% - 40px);
   background: #FFFFFF;
-  transform: translateX(-75%);
   z-index: 700;
-
   &__item {
     padding: 17px 24px;
     font-weight: 500;
@@ -20,5 +20,10 @@
     &_active {
       background-color: $accent-coror;
     }
+  }
+}
+@media screen and (min-width: 768px) {
+  .sort {
+    right: 60px;
   }
 }

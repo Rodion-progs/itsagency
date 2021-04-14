@@ -7,12 +7,39 @@ export default new Vuex.Store({
   state: {
     isCart: false,
     isDarkLayer: false,
+    isFilter: false,
+    width: 0,
     sorting: {
+      list: [
+        {
+          title: "Сначала дорогие",
+          active: true,
+          sortDir: 'DESC',
+          sortBy: 'price'
+        },
+        {
+          title: "Сначала недорогие",
+          active: false,
+          sortDir: 'ASC',
+          sortBy: 'price'
+        },
+        {
+          title: "Сначала популярные",
+          active: false,
+          sortDir: 'DESC',
+          sortBy: 'popularity'
+        },
+        {
+          title: "Сначала новые",
+          active: false,
+          sortDir: 'DESC',
+          sortBy: 'newest'
+        },
+      ],
       sortBy: "price",
       sortDir: 'DESC',
       show: false,
       position: {
-        x: 0,
         y: 0
       },
     },
@@ -132,7 +159,6 @@ export default new Vuex.Store({
         price: 5290,
         img: require("../assets/img/products/product_7.jpg"),
         tags: [
-          "Новинки",
           "Есть в наличии",
           "Контрактный",
           "Распродажа",
@@ -155,9 +181,6 @@ export default new Vuex.Store({
         price: 3400,
         img: require("../assets/img/products/product_9.jpg"),
         tags: [
-          "Новинки",
-          "Есть в наличии",
-          "Контрактный",
           "Распродажа",
         ],
       },
@@ -167,7 +190,6 @@ export default new Vuex.Store({
         price: 6000,
         img: require("../assets/img/products/product_6.jpg"),
         tags: [
-          "Новинки",
           "Есть в наличии",
           "Эксклюзивные",
           "Контрактный",
@@ -263,7 +285,6 @@ export default new Vuex.Store({
     },
     showSorting(state, payload) {
       state.sorting.show = true;
-      state.sorting.position.x = payload.x;
       state.sorting.position.y = payload.y;
     },
     hideSorting(state) {
@@ -273,11 +294,28 @@ export default new Vuex.Store({
       state.cartProducts = [];
     },
     deleteOneProduct(state, id) {
-      state.cartProducts = state.cartProducts.filter((item) => item.id !== id);
+      console.log(state.cartProducts)
+      state.cartProducts.find((item) => item.id === id).deleted = true;
+    },
+    recoverProduct(state, id) {
+      state.cartProducts.find((item) => item.id === id).deleted = false;
     },
     changeFilter(state, payload) {
       state.filters.find((item) => item.title === payload).selected =
         !state.filters.find((item) => item.title === payload).selected;
+    },
+    changeSorting(state, payload) {
+      state.sorting.sortBy = payload.sortBy;
+      state.sorting.sortDir = payload.sortDir;
+      state.sorting.list.find(item => item.active).active = false;
+      state.sorting.list.find(item => item.title === payload.title).active = true;
+      state.sorting.show = false;
+    },
+    changeWindowWidth(state, payload) {
+      state.width = payload;
+    },
+    toggleFilter(state, payload) {
+      state.isFilter = payload;
     },
   },
   actions: {
@@ -288,6 +326,7 @@ export default new Vuex.Store({
       } else {
         const item = getters.getProducts.find((item) => item.id === id);
         item.count = 1;
+        item.deleted = false;
         commit("pushInCart", Object.assign({}, item));
       }
       console.log(getters.getProductsInCart);
@@ -300,24 +339,31 @@ export default new Vuex.Store({
     getIsDarkLayer: state => state.isDarkLayer,
     getIsCartShow: state => state.isCart,
     getSorting: state => state.sorting,
+    getSortingActive: state => state.sorting.list.find(item => item.active),
     getFilters: state => state.filters,
     getActiveFilters: state => {
-     return  state.filters.filter((item) => item.selected);
+      return state.filters.filter((item) => item.selected);
     },
     getFilteredProducts: (state, getters) => {
       if (!getters.getActiveFilters.length) return state.products;
       const products = getters.getActiveFilters.map((item) =>
         state.products.filter((product) => product.tags.includes(item.title))
       );
+      return products[0];
+    },
+    sortingProducts: (state, getters) => {
+      let products = getters.getFilteredProducts
       if (state.sorting.sortBy === 'price') {
         const sortingBy = state.sorting.sortBy;
         const sortDir = state.sorting.sortDir === 'DESC' ? -1 : 1;
-        return products[0].sort((a, b) => sortDir * (a[sortingBy] - b[sortingBy]));
+        return products.sort((a, b) => sortDir * (a[sortingBy] - b[sortingBy]));
       } else if (state.sorting.sortBy === 'popularity') {
-        return products[0].sort((a, b) => a.popularity - b.popularity)
+        return products.sort((a, b) => a.popularity - b.popularity)
       } else {
-        return products[0].sort((a, b) => a - b)
+        return products.sort((a, b) => a.tags.includes("Новинки") - b.tags.includes("Новинки"))
       }
     },
-  },
+    getWindowWidth: (state) => state.width,
+    getIsFilter: (state) => state.isFilter,
+  }
 });

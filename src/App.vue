@@ -57,15 +57,22 @@
     <main class="main">
       <div class="container">
         <div class="row">
-          <AppFilter />
+          <transition name="filter">
+            <AppFilter
+                v-show="(isFilter && width <= 1200) || width > 1200"
+            />
+          </transition>
           <ProductsList />
         </div>
       </div>
     </main>
-    <AppCart v-show="isCartShow"/>
+    <transition name="cart">
+      <AppCart v-show="isCartShow"/>
+    </transition>
     <DarkLayer v-show="isCartShow" @click="closeCart"/>
     <ProductSort v-show="sorting.show" :style="{top: sorting.position.y + 'px', left: sorting.position.x + 'px'}"/>
     <DarkLayer v-show="sorting.show" @click="sortClose"/>
+    <DarkLayer v-show="isFilter && width <= 1200" @click="closeFilter"/>
     <AppFooter />
   </div>
 </template>
@@ -92,7 +99,10 @@ export default {
     DarkLayer,
     AppCart,
     AppFooter,
-    ProductSort
+    ProductSort,
+  },
+  created() {
+    window.addEventListener("resize", this.updateWidth);
   },
   directives: {
     swiper: directive,
@@ -101,6 +111,9 @@ export default {
     banners: "getBanners",
     isCartShow: "getIsCartShow",
     sorting: "getSorting",
+    filter: "getFilters",
+    width: "getWindowWidth",
+    isFilter: "getIsFilter",
   }),
   data() {
     return {
@@ -112,8 +125,8 @@ export default {
         },
         navigation: {
           nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
+          prevEl: ".swiper-button-prev",
+        },
       },
     };
   },
@@ -124,6 +137,37 @@ export default {
     sortClose () {
       this.$store.commit("hideSorting");
     },
-  }
+    updateWidth() {
+      this.$store.commit("changeWindowWidth", window.innerWidth);
+    },
+    closeFilter() {
+      this.$store.commit("toggleFilter", false);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.updateWidth);
+  },
 };
 </script>
+<style lang="scss" scoped>
+.filter-enter-active {
+  transition: all .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.filter-leave-active {
+  transition: all .3s ease-in-out;
+}
+.filter-enter, .filter-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.cart-enter-active {
+  transition: all .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.cart-leave-active {
+  transition: all .3s ease-in-out;
+}
+.cart-enter, .cart-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+</style>
