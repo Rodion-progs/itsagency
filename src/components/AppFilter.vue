@@ -4,9 +4,7 @@
     @mousedown="startDrag($event)"
     @mouseup="stopDrag($event)"
   >
-    <div
-      class="filter-stick"
-    ></div>
+    <div class="filter-stick"></div>
     <label
       class="filter__item"
       v-for="filter in getFilters"
@@ -43,11 +41,10 @@ export default {
       this.currentPosition = e.clientY;
     },
     stopDrag(e) {
-      if ((e.clientY - this.currentPosition) > 50) {
+      if (e.clientY - this.currentPosition > 50) {
         this.$store.commit("toggleFilter", false);
       }
-    }
+    },
   },
 };
 </script>
-

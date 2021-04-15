@@ -2,7 +2,9 @@
   <section class="product-list">
     <h2 class="product-list__title">Краски</h2>
     <div class="product-list__controls">
-      <span class="product-list__count">{{ products.length }} {{ normalize }}</span>
+      <span class="product-list__count"
+        >{{ products.length }} {{ normalize }}</span
+      >
       <button
         class="product-list__control-button product-list__control-button_filter"
         @click="toggleFilter(true)"
@@ -42,7 +44,7 @@
 <script>
 import { normalizeEnding } from "@/utils/utils";
 import ProductItem from "@/components/ProductItem.vue";
-import {mapGetters, mapMutations} from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "ProductsList",
   components: {
@@ -63,7 +65,7 @@ export default {
   },
   methods: {
     showSorting(e) {
-      this.$store.commit("showSorting", {y: e.layerY});
+      this.$store.commit("showSorting", { y: e.layerY });
     },
     ...mapMutations(["toggleFilter"]),
   },

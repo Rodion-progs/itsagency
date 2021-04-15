@@ -4,4 +4,4 @@ const normalizeEnding = (num, dec) => {
   if (num > 20) num = num % 10;
   return num === 1 ? dec[0] : num > 1 && num < 5 ? dec[1] : dec[2];
 };
-export { normalizeEnding }
+export { normalizeEnding };

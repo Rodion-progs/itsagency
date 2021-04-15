@@ -4,10 +4,6 @@
 
 <script>
 export default {
-name: "DatkLayer"
-}
+  name: "DatkLayer",
+};
 </script>
-
-<style scoped>
-
-</style>

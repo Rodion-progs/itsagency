@@ -225,7 +225,7 @@ export default {
       this.$store.commit("decreaseCountInCart", id);
     },
     recoverProduct(id) {
-      this.$store.commit("recoverProduct", id)
+      this.$store.commit("recoverProduct", id);
     },
   },
 };

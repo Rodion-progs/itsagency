@@ -2,10 +2,13 @@
   <ul class="sort">
     <li
       class="sort__item"
-      :class="{ 'sort__item_active': item.active }"
+      :class="{ sort__item_active: item.active }"
       v-for="item in getSorting.list"
       @click="changeSorting(item)"
-      :key="item.title">{{ item.title }}</li>
+      :key="item.title"
+    >
+      {{ item.title }}
+    </li>
   </ul>
 </template>
 
@@ -14,11 +17,6 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "ProductSort",
   computed: mapGetters(["getSorting"]),
-  methods: mapMutations(["changeSorting"])
-
-  }
+  methods: mapMutations(["changeSorting"]),
+};
 </script>
-
-<style scoped>
-
-</style>

@@ -13,66 +13,69 @@
               <p class="hero__text">{{ banner.text }}</p>
             </div>
           </swiper-slide>
-          <template  slot="pagination">
+          <template slot="pagination">
             <div class="swiper-pagination"></div>
           </template>
           <div class="swiper-button-prev" slot="button-prev">
             <svg
-                width="22"
-                height="42"
-                viewBox="0 0 22 42"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="42"
+              viewBox="0 0 22 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                  d="M1 41L21 21L1 1"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                d="M1 41L21 21L1 1"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </div>
           <div class="swiper-button-next" slot="button-next">
             <svg
-                width="22"
-                height="42"
-                viewBox="0 0 22 42"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="42"
+              viewBox="0 0 22 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                  d="M1 41L21 21L1 1"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                d="M1 41L21 21L1 1"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </div>
         </swiper>
-
       </div>
     </section>
     <main class="main">
       <div class="container">
         <div class="row">
           <transition name="filter">
-            <AppFilter
-                v-show="(isFilter && width <= 1200) || width > 1200"
-            />
+            <AppFilter v-show="(isFilter && width <= 1200) || width > 1200" />
           </transition>
           <ProductsList />
         </div>
       </div>
     </main>
     <transition name="cart">
-      <AppCart v-show="isCartShow"/>
+      <AppCart v-show="isCartShow" />
     </transition>
-    <DarkLayer v-show="isCartShow" @click="closeCart"/>
-    <ProductSort v-show="sorting.show" :style="{top: sorting.position.y + 'px', left: sorting.position.x + 'px'}"/>
-    <DarkLayer v-show="sorting.show" @click="sortClose"/>
-    <DarkLayer v-show="isFilter && width <= 1200" @click="closeFilter"/>
+    <DarkLayer v-show="isCartShow" @click="closeCart" />
+    <ProductSort
+      v-show="sorting.show"
+      :style="{
+        top: sorting.position.y + 'px',
+        left: sorting.position.x + 'px',
+      }"
+    />
+    <DarkLayer v-show="sorting.show" @click="sortClose" />
+    <DarkLayer v-show="isFilter && width <= 1200" @click="closeFilter" />
     <AppFooter />
   </div>
 </template>
@@ -86,7 +89,7 @@ import DarkLayer from "@/components/UI/DatkLayer.vue";
 import ProductSort from "@/components/ProductSort.vue";
 import AppCart from "@/components/AppCart.vue";
 import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -132,10 +135,10 @@ export default {
     };
   },
   methods: {
-    closeCart () {
+    closeCart() {
       this.$store.commit("toggleCart", false);
     },
-    sortClose () {
+    sortClose() {
       this.$store.commit("hideSorting");
     },
     updateWidth() {
@@ -143,7 +146,7 @@ export default {
     },
     closeFilter() {
       this.$store.commit("toggleFilter", false);
-    }
+    },
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.updateWidth);
@@ -152,22 +155,24 @@ export default {
 </script>
 <style lang="scss" scoped>
 .filter-enter-active {
-  transition: all .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .filter-leave-active {
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.filter-enter, .filter-leave-to {
+.filter-enter,
+.filter-leave-to {
   transform: translateY(100%);
   opacity: 0;
 }
 .cart-enter-active {
-  transition: all .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .cart-leave-active {
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.cart-enter, .cart-leave-to {
+.cart-enter,
+.cart-leave-to {
   transform: translateX(100%);
   opacity: 0;
 }
