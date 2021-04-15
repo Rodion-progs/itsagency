@@ -201,7 +201,6 @@ export default {
       ]);
     },
     totalPrice() {
-      console.log(this.products);
       return this.products
         .filter((product) => !product.deleted)
         .reduce((acc, item) => (acc += item.price * item.count), 0)

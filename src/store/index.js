@@ -277,7 +277,6 @@ export default new Vuex.Store({
       state.cartProducts.find(item => item.id === id).count -= 1;
     },
     pushInCart(state, payload) {
-      console.log(state)
       state.cartProducts.push(payload);
     },
     toggleCart(state, payload) {
@@ -294,7 +293,6 @@ export default new Vuex.Store({
       state.cartProducts = [];
     },
     deleteOneProduct(state, id) {
-      console.log(state.cartProducts)
       state.cartProducts.find((item) => item.id === id).deleted = true;
     },
     recoverProduct(state, id) {
@@ -329,7 +327,6 @@ export default new Vuex.Store({
         item.deleted = false;
         commit("pushInCart", Object.assign({}, item));
       }
-      console.log(getters.getProductsInCart);
     },
   },
   getters: {
@@ -346,16 +343,21 @@ export default new Vuex.Store({
     },
     getFilteredProducts: (state, getters) => {
       if (!getters.getActiveFilters.length) return state.products;
-      const products = getters.getActiveFilters.map((item) =>
-        state.products.filter((product) => product.tags.includes(item.title))
+      const activeFilter = getters.getActiveFilters.map(
+        (item) => item.title
       );
-      return products[0];
+      const products = state.products.filter((product) =>{
+        return product.tags.some((tag) => activeFilter.includes(tag))
+        }
+      );
+      return products;
     },
     sortingProducts: (state, getters) => {
-      let products = getters.getFilteredProducts
+      let products = getters.getFilteredProducts;
       if (state.sorting.sortBy === 'price') {
         const sortingBy = state.sorting.sortBy;
         const sortDir = state.sorting.sortDir === 'DESC' ? -1 : 1;
+
         return products.sort((a, b) => sortDir * (a[sortingBy] - b[sortingBy]));
       } else if (state.sorting.sortBy === 'popularity') {
         return products.sort((a, b) => a.popularity - b.popularity)

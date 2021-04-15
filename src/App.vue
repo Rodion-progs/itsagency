@@ -101,8 +101,9 @@ export default {
     AppFooter,
     ProductSort,
   },
-  created() {
+  mounted() {
     window.addEventListener("resize", this.updateWidth);
+    this.$store.commit("changeWindowWidth", window.innerWidth);
   },
   directives: {
     swiper: directive,

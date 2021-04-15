@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: "getFilteredProducts",
+      products: "sortingProducts",
       activeSorting: "getSortingActive",
     }),
     normalize() {
